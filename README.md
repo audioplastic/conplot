@@ -1,7 +1,7 @@
 conplot
 =======
 
-Plotting library for console apps. It is work in progress!
+C++11 plotting library for console apps. It is work in progress!
 
 ```
 /~ Spongeballs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
