@@ -9,6 +9,7 @@
 #ifndef conplot_SigGen_h
 #define conplot_SigGen_h
 
+#include <array>
 
 
 //     _                   _    __                  _
