@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		01055A521680D13B00FA026C /* conplot.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01055A511680D13B00FA026C /* conplot.1 */; };
 		01055A5C1680D1A000FA026C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01055A5B1680D1A000FA026C /* main.cpp */; };
+		01FE12D716CE5BB400952ADA /* DrawToMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01FE12D516CE5BB400952ADA /* DrawToMemory.cpp */; };
+		01FE12DA16CE5E7000952ADA /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01FE12D816CE5E7000952ADA /* Rectangle.cpp */; };
+		01FE12DD16CE5EAF00952ADA /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01FE12DB16CE5EAF00952ADA /* Point.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +39,9 @@
 		01FE12D216CE55F800952ADA /* DrawToMemory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawToMemory.hpp; sourceTree = "<group>"; };
 		01FE12D316CE56B400952ADA /* TicToc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicToc.h; sourceTree = "<group>"; };
 		01FE12D416CE57A300952ADA /* DataSeries.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataSeries.hpp; sourceTree = "<group>"; };
+		01FE12D516CE5BB400952ADA /* DrawToMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawToMemory.cpp; sourceTree = "<group>"; };
+		01FE12D816CE5E7000952ADA /* Rectangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rectangle.cpp; sourceTree = "<group>"; };
+		01FE12DB16CE5EAF00952ADA /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +76,15 @@
 			children = (
 				01055A581680D1A000FA026C /* catch.hpp */,
 				01055A5D1680D75E00FA026C /* Point.hpp */,
+				01FE12DB16CE5EAF00952ADA /* Point.cpp */,
 				01055A5A1680D1A000FA026C /* Rectangle.hpp */,
+				01FE12D816CE5E7000952ADA /* Rectangle.cpp */,
 				01055A5B1680D1A000FA026C /* main.cpp */,
 				01055A511680D13B00FA026C /* conplot.1 */,
 				01BFC09D16873BCA00B0F1BA /* SigGen.hpp */,
 				01FE12D116CE53E800952ADA /* DrawToScreen.hpp */,
 				01FE12D216CE55F800952ADA /* DrawToMemory.hpp */,
+				01FE12D516CE5BB400952ADA /* DrawToMemory.cpp */,
 				01FE12D316CE56B400952ADA /* TicToc.h */,
 				01FE12D416CE57A300952ADA /* DataSeries.hpp */,
 			);
@@ -134,6 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				01055A5C1680D1A000FA026C /* main.cpp in Sources */,
+				01FE12D716CE5BB400952ADA /* DrawToMemory.cpp in Sources */,
+				01FE12DA16CE5E7000952ADA /* Rectangle.cpp in Sources */,
+				01FE12DD16CE5EAF00952ADA /* Point.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

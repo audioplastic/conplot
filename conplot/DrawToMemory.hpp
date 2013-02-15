@@ -11,6 +11,10 @@
 
 #include <array>
 #include "DataSeries.hpp"
+#include "Point.hpp"
+#include "Rectangle.hpp"
+#include "SigGen.hpp"
+
 
 using namespace std;
 
@@ -96,6 +100,7 @@ public:
     
 };
 
+// ===============================================================================================
 
 //     _       _
 //  __| | __ _| |_ __ _
@@ -120,11 +125,7 @@ private:
     //| |_) | |  | |\ V / (_| | ||  __/ | | | | | |  __/ |_| | | | (_) | (_| \__ \
     //| .__/|_|  |_| \_/ \__,_|\__\___| |_| |_| |_|\___|\__|_| |_|\___/ \__,_|___/
     //|_|
-    void addPoint(Point p, char c)
-    {
-        
-        data[p.getY()][p.getX()] = c;
-    }
+    void addPoint(Point p, char c);
     
     void drawBox(const Rectangle& r)
     {

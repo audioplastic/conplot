@@ -8,10 +8,8 @@
 #include <algorithm>
 
 
-#include "Point.hpp"
-#include "Rectangle.hpp"
-#include "SigGen.hpp"
 
+#include "SigGen.hpp"
 #include "DrawToScreen.hpp"
 
 using namespace std;

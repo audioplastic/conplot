@@ -63,7 +63,7 @@ public:
 // Square wave generator
 class gen_square {
     int  counter;// U and d are up and down cycles
-    bool isDown = FALSE;
+    bool isDown = false;
     std::array<int,2> stateSamples;
     std::array<float,2> stateValues;
     
@@ -87,7 +87,7 @@ public:
 // TriSaw generator
 class gen_trisaw {
     int  counter;
-    bool isDown = FALSE;
+    bool isDown = false;
     float ma, mi;
     std::array<int,2> stateSamples;
     std::array<float,2> stateSlopes;

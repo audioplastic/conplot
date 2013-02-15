@@ -9,6 +9,10 @@
 #ifndef conplot_DataSeries_hpp
 #define conplot_DataSeries_hpp
 
+#include <vector>
+#include <iostream>
+
+
 using namespace std;
 
 // __           _                 _       _
