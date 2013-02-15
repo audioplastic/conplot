@@ -30,20 +30,23 @@ namespace  {
         ,BORDER_BR
         ,DATUM
         ,AXIS_V
-        ,AXIS_H
+        ,AXIS_HL
+        ,AXIS_HM
         ,NUMEL
     };
     
     enum class o_t : unsigned char {
         BORDER          = 0x01 // 0x01 ==   1 == "0000 0001"
-        ,AXES           = 0x02 // 0x02 ==   2 == "0000 0010"
-        ,STEM           = 0x04 // 0x04 ==   4 == "0000 0100"
+        ,XAXIS          = 0x02 // 0x02 ==   2 == "0000 0010"
+        ,YAXIS          = 0x04 // 0x04 ==   4 == "0000 0100"
         ,TITLE          = 0x08 // 0x08 ==   8 == "0000 1000"
         ,LEGEND         = 0x10 // 0x10 ==  16 == "0001 0000"
-        ,RESERVED2      = 0x20 // 0x20 ==  32 == "0010 0000"
-        ,RESERVED3      = 0x40 // 0x40 ==  64 == "0100 0000"
-        ,RESERVED4      = 0x80 // 0x80 == 128 == "1000 0000"
+        ,VERBOSE        = 0x20 // 0x20 ==  32 == "0010 0000"
+        ,STEM           = 0x40 // 0x40 ==  64 == "0100 0000"
+        ,RESERVED       = 0x80 // 0x80 == 128 == "1000 0000"
+        //Compund flags below
         ,ALL            = 0xFF // 0xFF == 256 == "1111 1111"
+        ,AXES           = 0x06 // 0x06 ==   6 == "0000 0110"
     };
 }
 
@@ -91,7 +94,8 @@ public:
         charContainer[(int)p_t::BORDER_BL] = '\\';
         charContainer[(int)p_t::BORDER_BR] = '/';
         charContainer[(int)p_t::DATUM] = 'o';
-        charContainer[(int)p_t::AXIS_H] = '-';
+        charContainer[(int)p_t::AXIS_HM] = '-';
+        charContainer[(int)p_t::AXIS_HL] = '_';
         charContainer[(int)p_t::AXIS_V] = '|';
     }
     
@@ -338,7 +342,22 @@ private:
     
     void addLegend()
 	{
-        //Make a rectangle size that fits series data names and then plce it
+//        //Make a rectangle size that fits series data names and then plce it
+//        const size_t maxw = plotArea.getWidth()-4;
+//        const size_t maxh = plotArea.getHeight()-4;
+//        
+//        const size_t hNeeded = series.getNumSeries() + 2;
+//        if (hNeeded>maxh)
+//        {
+//            cout << "Warning: Not enough veritcal space for legend";
+//        }
+//        
+//        size_t wNeeded = 0;
+//        for (auto tmpSeries : series)
+//        {
+//            
+//        }
+        
 	}
     
     
@@ -384,6 +403,29 @@ private:
             addString(Point(axArea.getLeft(),nn), v.str()  );
         }
         
+    }
+    
+    void addXAxis(const float xmi, const float xma, const Rectangle axArea)
+    {
+        addString(Point(axArea.getLeft(), axArea.getBtm()+1), "^" );
+        addString(Point(axArea.getRight(), axArea.getBtm()+1), "^" );
+        
+        const size_t min_prec = 4;
+        
+        if (axArea.getWidth() > 2*min_prec+4) // Only put numerice values if there is space
+        {
+            const size_t prec = axArea.getWidth()-4;
+            char buf[prec+1]; // The +1 contains the trunctaion warning
+            size_t l; //The "desired" string length returned from snprintf;
+            
+            l = std::snprintf(buf, prec, "%g", xmi);
+            if (l > prec) buf[prec-1] = 't'; // Puts a t to flag truncation
+            addString(Point(axArea.getLeft()+1, axArea.getBtm()+1), buf);
+            
+            l = std::snprintf(buf, prec, "%g", xma);
+            if (l > prec) buf[prec-1] = 't';// Puts a t to flag truncation
+            addString(Point(axArea.getRight()-(int)std::min(l,prec), axArea.getBtm()+1), buf);
+        }
     }
     
     
@@ -490,8 +532,9 @@ public:
         const T yMax = series.getYmax();
         
         
+        
         // Add the y-axis if flagged
-        if (flags & (int)o_t::AXES) {
+        if (flags & (int)o_t::YAXIS) {
             const int yaxWidth = 10;
             Rectangle rAx = Rectangle(plotArea.getTL(), yaxWidth, plotArea.getHeight());
             addYAxis(yMin, yMax, rAx);
@@ -499,6 +542,11 @@ public:
             // Shift the plot area 
             plotArea.setWidth(plotArea.getWidth()-yaxWidth);
             plotArea.translate(yaxWidth, 0);
+        }
+        
+        // Add simple x-axis indicators if requested
+        if (flags & (int)o_t::XAXIS) {
+            addXAxis(xMin, xMax, plotArea);
         }
         
         
@@ -541,11 +589,14 @@ public:
 //  \_/ \___|\___|\__\___/|_|      \_/ \___/|_| |_| |_|_|\__|
 ostream& operator<<(ostream& os, DataGrid& dg)
 {
-    
+    auto renderFunc = [&](){dg.render<float>();}; // Lambda to keep things dry
+    if (dg.flags & (int)o_t::VERBOSE)
     {
-        cout << "Rendering in memory... ";
         TicToc t;
-        dg.render<float>();
+        cout << "Rendering in memory... ";
+        renderFunc();
+    } else {
+        renderFunc();
     }
 
     os << endl;// New line so command prompt not in the way!
@@ -590,18 +641,18 @@ int main(int argc, char *argv[])
     
     
     
-    std::generate_n(x.begin(), elements, gen_lin(10.f,5.f) );
+    std::generate_n(x.begin(), elements, gen_lin(100.f, 100.f) );
 //    auto lin = gen_lin(10.f,5.f);
 //    std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
     
     
     
     shared_ptr<PlotChars> ch (new PlotChars());
-    DataGrid g = DataGrid(ch, Rectangle(Point(0,0), 80, 30)); // Half console
+    DataGrid g = DataGrid(ch, Rectangle(Point(0,0), 90, 31)); // Half console
     ch->setChar(p_t::BORDER_T, '~');
     ch->setChar(p_t::BORDER_B, '~');
     
-    g.getSeries()->addSeries(   SeriesData<float>(y,x) , '*' );
+    g.getSeries()->addSeries(   SeriesData<float>(y,x) , '*', "Series A" );
     
     std::vector<float> y2(elements);
     std::generate_n(y2.begin(), elements, [&](){return .5*a();} );
