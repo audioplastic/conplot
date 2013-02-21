@@ -10,6 +10,7 @@
 #define conplot_TicToc_h
 
 #include <chrono>
+#include <iostream>
 
 // TicToc RAII profiler
 class TicToc
@@ -28,8 +29,8 @@ public:
     {
         t2 = clock::now();
         std::cout << "Elapsed time is "
-        << std::chrono::duration_cast<res>(t2-t1).count()/1e6
-        << " seconds.\n";
+        << 1000*(std::chrono::duration_cast<res>(t2-t1).count()/1e6)
+        << " milliseconds.\n";
     }
 };
 

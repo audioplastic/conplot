@@ -2,15 +2,7 @@
 // This needs to go right at the top
 #define CATCH_CONFIG_RUNNER
 
-#include <vector>
-#include <iostream>
-#include <random>
-#include <algorithm>
-
-
-
-#include "SigGen.hpp"
-#include "DrawToScreen.hpp"
+#include "conplot.h"
 
 using namespace std;
 
@@ -37,9 +29,9 @@ int main(int argc, char *argv[])
 //    std::generate_n(y.begin(), elements, gen_trisaw(elements / 3, 1.0f) );
     
     
-    std::generate_n(x.begin(), elements, gen_lin(100.f, 100.f) );
-//    auto lin = gen_lin(10.f,5.f);
-//    std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
+//    std::generate_n(x.begin(), elements, gen_lin(100.f, 100.f) );
+    auto lin = gen_lin(10.f,5.f);
+    std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
     
     
     
@@ -50,16 +42,16 @@ int main(int argc, char *argv[])
     g.setChars(tmpChars);
     
     auto a = gen_sine(2.f*M_PI/elements); auto b = gen_sine(3 * 2.f*M_PI/elements);
-    std::generate_n(y.begin(), elements, [&](){ return 0.1*(a() + b()); } );
+    std::generate_n(y.begin(), elements, [&](){ return (a() + b()); } );
     g.getSeries()->addSeries(   SeriesData<float>(y,x) , '*', "Series A" );
     
-//    std::vector<float> y2(elements);
-//    std::generate_n(y2.begin(), elements, [&](){return .5*a();} );
-//    g.getSeries()->addSeries(   SeriesData<float>(y2,x)  );
-//    
-//    std::vector<float> y3(elements);
-//    std::generate_n(y3.begin(), elements, [&](){return -a();} );
-//    g.getSeries()->addSeries(   SeriesData<float>(y3,x), '>'  );
+    std::vector<float> y2(elements);
+    std::generate_n(y2.begin(), elements, [&](){return .5*a();} );
+    g.getSeries()->addSeries(   SeriesData<float>(y2,x)  );
+    
+    std::vector<float> y3(elements);
+    std::generate_n(y3.begin(), elements, [&](){return -a();} );
+    g.getSeries()->addSeries(   SeriesData<float>(y3,x), '>'  );
     
     
     g.setTitle("Spongeballs");
@@ -68,7 +60,7 @@ int main(int argc, char *argv[])
 	cout << g;
     
     
-#ifdef DEBUG
+#ifdef CONPLOT_UNIT_TEST
 	// Create a default config object
     Catch::Config config;
     

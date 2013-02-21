@@ -1,5 +1,5 @@
 //
-//  DataSeries.hpp
+//  DataSeries.h
 //  conplot
 //
 //  Created by Nick on 15/02/2013.

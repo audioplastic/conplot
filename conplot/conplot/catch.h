@@ -247,13 +247,13 @@ namespace Catch {
     
 }
 
-// #included from: internal/catch_test_registry.hpp
+// #included from: internal/catch_test_registry.h
 #define TWOBLUECUBES_CATCH_TEST_REGISTRY_HPP_INCLUDED
 
 // #included from: catch_interfaces_testcase.h
 #define TWOBLUECUBES_CATCH_INTERFACES_TESTCASE_H_INCLUDED
 
-// #included from: catch_ptr.hpp
+// #included from: catch_ptr.h
 #define TWOBLUECUBES_CATCH_PTR_HPP_INCLUDED
 
 namespace Catch {
@@ -437,25 +437,25 @@ Catch::AutoReg INTERNAL_CATCH_UNIQUE_NAME( autoRegistrar ) ( &INTERNAL_CATCH_UNI
 } \
 void INTERNAL_CATCH_UNIQUE_NAME( TestCaseMethod_catch_internal_ )::test()
 
-// #included from: internal/catch_capture.hpp
+// #included from: internal/catch_capture.h
 #define TWOBLUECUBES_CATCH_CAPTURE_HPP_INCLUDED
 
-// #included from: catch_expression_decomposer.hpp
+// #included from: catch_expression_decomposer.h
 #define TWOBLUECUBES_CATCH_EXPRESSION_DECOMPOSER_HPP_INCLUDED
 
-// #included from: catch_expression_lhs.hpp
+// #included from: catch_expression_lhs.h
 #define TWOBLUECUBES_CATCH_EXPRESSION_LHS_HPP_INCLUDED
 
 // #included from: catch_expressionresult_builder.h
 #define TWOBLUECUBES_CATCH_ASSERTIONRESULT_BUILDER_H_INCLUDED
 
-// #included from: catch_tostring.hpp
+// #included from: catch_tostring.h
 #define TWOBLUECUBES_CATCH_TOSTRING_HPP_INCLUDED
 
 #include <sstream>
 
 #ifdef __OBJC__
-// #included from: catch_objc_arc.hpp
+// #included from: catch_objc_arc.h
 #define TWOBLUECUBES_CATCH_OBJC_ARC_HPP_INCLUDED
 
 #import <Foundation/Foundation.h>
@@ -744,7 +744,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_evaluate.hpp
+// #included from: catch_evaluate.h
 #define TWOBLUECUBES_CATCH_EVALUATE_HPP_INCLUDED
 
 namespace Catch {
@@ -1032,7 +1032,7 @@ namespace Catch {
 #define TWOBLUECUBES_CATCH_INTERFACES_CAPTURE_H_INCLUDED
 
 #include <string>
-// #included from: catch_totals.hpp
+// #included from: catch_totals.h
 #define TWOBLUECUBES_CATCH_TOTALS_HPP_INCLUDED
 
 #include <cstddef>
@@ -1121,7 +1121,7 @@ namespace Catch {
     };
 }
 
-// #included from: catch_debugger.hpp
+// #included from: catch_debugger.h
 #define TWOBLUECUBES_CATCH_DEBUGGER_HPP_INCLUDED
 
 #include <iostream>
@@ -1233,7 +1233,7 @@ inline void writeToDebugConsole( const std::string& text ) {
 // #included from: catch_interfaces_reporter.h
 #define TWOBLUECUBES_CATCH_INTERFACES_REPORTER_H_INCLUDED
 
-// #included from: catch_config.hpp
+// #included from: catch_config.h
 #define TWOBLUECUBES_CATCH_CONFIG_HPP_INCLUDED
 
 // #included from: catch_test_spec.h
@@ -1289,7 +1289,7 @@ namespace Catch {
     };
 }
 
-// #included from: catch_tags.hpp
+// #included from: catch_tags.h
 #define TWOBLUECUBES_CATCH_TAGS_HPP_INCLUDED
 
 #include <string>
@@ -1635,7 +1635,7 @@ namespace Catch {
     };
 }
 
-// #included from: catch_stream.hpp
+// #included from: catch_stream.h
 #define TWOBLUECUBES_CATCH_STREAM_HPP_INCLUDED
 
 // #included from: catch_streambuf.h
@@ -2184,7 +2184,7 @@ throw; \
 } \
 } while( Catch::isTrue( false ) )
 
-// #included from: internal/catch_section.hpp
+// #included from: internal/catch_section.h
 #define TWOBLUECUBES_CATCH_SECTION_HPP_INCLUDED
 
 #include <string>
@@ -2222,7 +2222,7 @@ namespace Catch {
 #define INTERNAL_CATCH_SECTION( name, desc ) \
 if( Catch::Section INTERNAL_CATCH_UNIQUE_NAME( catch_internal_Section ) = Catch::Section( name, desc, CATCH_INTERNAL_LINEINFO ) )
 
-// #included from: internal/catch_generators.hpp
+// #included from: internal/catch_generators.h
 #define TWOBLUECUBES_CATCH_GENERATORS_HPP_INCLUDED
 
 #include <iterator>
@@ -2459,7 +2459,7 @@ static std::string INTERNAL_CATCH_UNIQUE_NAME( catch_internal_ExceptionTranslato
 namespace{ Catch::ExceptionTranslatorRegistrar INTERNAL_CATCH_UNIQUE_NAME( catch_internal_ExceptionRegistrar )( &INTERNAL_CATCH_UNIQUE_NAME( catch_internal_ExceptionTranslator ) ); }\
 static std::string INTERNAL_CATCH_UNIQUE_NAME(  catch_internal_ExceptionTranslator )( signature )
 
-// #included from: internal/catch_approx.hpp
+// #included from: internal/catch_approx.h
 #define TWOBLUECUBES_CATCH_APPROX_HPP_INCLUDED
 
 #include <cmath>
@@ -2540,7 +2540,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: internal/catch_matchers.hpp
+// #included from: internal/catch_matchers.h
 #define TWOBLUECUBES_CATCH_MATCHERS_HPP_INCLUDED
 
 namespace Catch {
@@ -2757,7 +2757,7 @@ namespace Catch {
 
 
 #ifdef __OBJC__
-// #included from: internal/catch_objc.hpp
+// #included from: internal/catch_objc.h
 #define TWOBLUECUBES_CATCH_OBJC_HPP_INCLUDED
 
 #import <objc/runtime.h>
@@ -2765,7 +2765,7 @@ namespace Catch {
 #include <string>
 
 // NB. Any general catch headers included here must be included
-// in catch.hpp first to make sure they are included by the single
+// in catch.h first to make sure they are included by the single
 // header for non obj-usage
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2952,7 +2952,7 @@ return @ desc; \
 #endif
 
 #if defined( CATCH_CONFIG_MAIN ) || defined( CATCH_CONFIG_RUNNER )
-// #included from: internal/catch_impl.hpp
+// #included from: internal/catch_impl.h
 #define TWOBLUECUBES_CATCH_IMPL_HPP_INCLUDED
 
 // Collect all the implementation files together here
@@ -2963,10 +2963,10 @@ return @ desc; \
 #pragma clang diagnostic ignored "-Wweak-vtables"
 #endif
 
-// #included from: catch_runner.hpp
+// #included from: catch_runner.h
 #define TWOBLUECUBES_CATCH_RUNNER_HPP_INCLUDED
 
-// #included from: internal/catch_commandline.hpp
+// #included from: internal/catch_commandline.h
 #define TWOBLUECUBES_CATCH_COMMANDLINE_HPP_INCLUDED
 
 namespace Catch {
@@ -3622,7 +3622,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: internal/catch_list.hpp
+// #included from: internal/catch_list.h
 #define TWOBLUECUBES_CATCH_LIST_HPP_INCLUDED
 
 #include <limits>
@@ -3681,13 +3681,13 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: internal/catch_runner_impl.hpp
+// #included from: internal/catch_runner_impl.h
 #define TWOBLUECUBES_CATCH_RUNNER_IMPL_HPP_INCLUDED
 
-// #included from: catch_running_test.hpp
+// #included from: catch_running_test.h
 #define TWOBLUECUBES_CATCH_RUNNING_TEST_HPP_INCLUDED
 
-// #included from: catch_section_info.hpp
+// #included from: catch_section_info.h
 #define TWOBLUECUBES_CATCH_SECTION_INFO_HPP_INCLUDED
 
 #include <map>
@@ -4409,10 +4409,10 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_registry_hub.hpp
+// #included from: catch_registry_hub.h
 #define TWOBLUECUBES_CATCH_REGISTRY_HUB_HPP_INCLUDED
 
-// #included from: catch_test_case_registry_impl.hpp
+// #included from: catch_test_case_registry_impl.h
 #define TWOBLUECUBES_CATCH_TEST_CASE_REGISTRY_IMPL_HPP_INCLUDED
 
 #include <vector>
@@ -4545,7 +4545,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_reporter_registry.hpp
+// #included from: catch_reporter_registry.h
 #define TWOBLUECUBES_CATCH_REPORTER_REGISTRY_HPP_INCLUDED
 
 #include <map>
@@ -4580,7 +4580,7 @@ namespace Catch {
     };
 }
 
-// #included from: catch_exception_translator_registry.hpp
+// #included from: catch_exception_translator_registry.h
 #define TWOBLUECUBES_CATCH_EXCEPTION_TRANSLATOR_REGISTRY_HPP_INCLUDED
 
 #ifdef __OBJC__
@@ -4709,7 +4709,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_notimplemented_exception.hpp
+// #included from: catch_notimplemented_exception.h
 #define TWOBLUECUBES_CATCH_NOTIMPLEMENTED_EXCEPTION_HPP_INCLUDED
 
 #include <ostream>
@@ -4730,7 +4730,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_context_impl.hpp
+// #included from: catch_context_impl.h
 #define TWOBLUECUBES_CATCH_CONTEXT_IMPL_HPP_INCLUDED
 
 namespace Catch {
@@ -4829,10 +4829,10 @@ namespace Catch {
     }
 }
 
-// #included from: catch_console_colour_impl.hpp
+// #included from: catch_console_colour_impl.h
 #define TWOBLUECUBES_CATCH_CONSOLE_COLOUR_IMPL_HPP_INCLUDED
 
-// #included from: catch_console_colour.hpp
+// #included from: catch_console_colour.h
 #define TWOBLUECUBES_CATCH_CONSOLE_COLOUR_HPP_INCLUDED
 
 namespace Catch {
@@ -5002,7 +5002,7 @@ namespace Catch {
 
 #endif
 
-// #included from: catch_generators_impl.hpp
+// #included from: catch_generators_impl.h
 #define TWOBLUECUBES_CATCH_GENERATORS_IMPL_HPP_INCLUDED
 
 #include <vector>
@@ -5076,7 +5076,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_assertionresult.hpp
+// #included from: catch_assertionresult.h
 #define TWOBLUECUBES_CATCH_ASSERTIONRESULT_HPP_INCLUDED
 
 namespace Catch {
@@ -5150,7 +5150,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_expressionresult_builder.hpp
+// #included from: catch_expressionresult_builder.h
 #define TWOBLUECUBES_CATCH_EXPRESSIONRESULT_BUILDER_HPP_INCLUDED
 
 #include <assert.h>
@@ -5238,7 +5238,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: catch_test_case_info.hpp
+// #included from: catch_test_case_info.h
 #define TWOBLUECUBES_CATCH_TEST_CASE_INFO_HPP_INCLUDED
 
 namespace Catch {
@@ -5346,10 +5346,10 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: ../reporters/catch_reporter_basic.hpp
+// #included from: ../reporters/catch_reporter_basic.h
 #define TWOBLUECUBES_CATCH_REPORTER_BASIC_HPP_INCLUDED
 
-// #included from: ../internal/catch_reporter_registrars.hpp
+// #included from: ../internal/catch_reporter_registrars.h
 #define TWOBLUECUBES_CATCH_REPORTER_REGISTRARS_HPP_INCLUDED
 
 namespace Catch {
@@ -5711,10 +5711,10 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: ../reporters/catch_reporter_xml.hpp
+// #included from: ../reporters/catch_reporter_xml.h
 #define TWOBLUECUBES_CATCH_REPORTER_XML_HPP_INCLUDED
 
-// #included from: ../internal/catch_xmlwriter.hpp
+// #included from: ../internal/catch_xmlwriter.h
 #define TWOBLUECUBES_CATCH_XMLWRITER_HPP_INCLUDED
 
 #include <sstream>
@@ -6046,7 +6046,7 @@ namespace Catch {
     
 } // end namespace Catch
 
-// #included from: ../reporters/catch_reporter_junit.hpp
+// #included from: ../reporters/catch_reporter_junit.h
 #define TWOBLUECUBES_CATCH_REPORTER_JUNIT_HPP_INCLUDED
 
 namespace Catch {
@@ -6313,7 +6313,7 @@ namespace Catch {
 #endif
 
 #ifdef CATCH_CONFIG_MAIN
-// #included from: internal/catch_default_main.hpp
+// #included from: internal/catch_default_main.h
 #define TWOBLUECUBES_CATCH_DEFAULT_MAIN_HPP_INCLUDED
 
 #ifndef __OBJC__

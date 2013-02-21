@@ -1,5 +1,5 @@
 //
-//  DrawToScreen.hpp
+//  DrawToScreen.h
 //  conplot
 //
 //  Created by Nick on 15/02/2013.
@@ -9,7 +9,7 @@
 #ifndef conplot_DrawToScreen_hpp
 #define conplot_DrawToScreen_hpp
 
-#include "DrawToMemory.hpp"
+#include "DrawToMemory.h"
 #include "TicToc.h"
 
 using namespace std;
@@ -25,7 +25,7 @@ ostream& operator<<(ostream& os, DataGrid& dg)
     if (dg.flags & (int)o_t::VERBOSE)
     {
         TicToc t;
-        cout << "Rendering in memory... ";
+        cout << "Rendering on stack... ";
         renderFunc();
     } else {
         renderFunc();

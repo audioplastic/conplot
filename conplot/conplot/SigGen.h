@@ -10,6 +10,7 @@
 #define conplot_SigGen_h
 
 #include <array>
+#include <cmath>
 
 
 //     _                   _    __                  _

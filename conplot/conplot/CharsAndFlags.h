@@ -1,5 +1,5 @@
 //
-//  CharsAndFlags.hpp
+//  CharsAndFlags.h
 //  conplot
 //
 //  Created by Nick on 21/02/2013.
@@ -8,6 +8,8 @@
 
 #ifndef conplot_CharsAndFlags_hpp
 #define conplot_CharsAndFlags_hpp
+
+#include <array>
 
 // Put the enum classes in global scope
 // Not too dangerous as it just becomes like an int or float or something
@@ -52,7 +54,7 @@ namespace  {
 // \___|_| |_|\__,_|_|    |_| |_|\__,_|_| |_|\__,_|_|\___|_|
 class PlotChars
 {
-    array<char, (int)p_t::NUMEL> charContainer; //implicit instantiation of undefined temple --> remember to include <array>!!
+    std::array<char, (int)p_t::NUMEL> charContainer; //implicit instantiation of undefined temple --> remember to include <array>!!
     
 public:
     PlotChars()

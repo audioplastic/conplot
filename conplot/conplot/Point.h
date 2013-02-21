@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <utility>
 
-#include "catch.hpp"
+#include "catch.h"
 
 
 //=================================================================================

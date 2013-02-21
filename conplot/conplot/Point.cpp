@@ -12,9 +12,8 @@
 // Catch will complain of duplicate tests
 
 
-#include "Point.hpp"
+#include "Point.h"
 
-#ifdef DEBUG
 //              _ _     _____          _
 //  /\ /\ _ __ (_) |_  /__   \___  ___| |_ ___
 // / / \ \ '_ \| | __|   / /\/ _ \/ __| __/ __|
@@ -122,7 +121,4 @@ TEST_CASE("Point/relational", "test overloaded relational operators")
 	REQUIRE(Point(10,20)<Point(11,20));
 }
 
-
-
-#endif //DEBUG
 //======

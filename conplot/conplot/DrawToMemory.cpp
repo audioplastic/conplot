@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#include "DrawToMemory.hpp"
+#include "DrawToMemory.h"
 
 
 //PRIVATE METHODS ================================================

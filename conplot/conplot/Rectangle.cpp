@@ -10,9 +10,8 @@
 // If they are paced in a header, they will be run multiple times
 // Catch will complain of duplicate tests
 
-#include "Rectangle.hpp"
+#include "Rectangle.h"
 
-#ifdef DEBUG
 //              _ _     _____          _
 //  /\ /\ _ __ (_) |_  /__   \___  ___| |_ ___
 // / / \ \ '_ \| | __|   / /\/ _ \/ __| __/ __|
@@ -120,6 +119,4 @@ TEST_CASE( "Rectangle/ctor", "Check other constructors")
     
 }
 
-
-#endif //DEBUG
 //======

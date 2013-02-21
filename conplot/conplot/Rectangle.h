@@ -4,10 +4,10 @@
 
 // PREPROCESSOR info for unit  :
 // #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include "catch.h"
 
 // OTHER dependencies 
-#include "Point.hpp"
+#include "Point.h"
 
 
 

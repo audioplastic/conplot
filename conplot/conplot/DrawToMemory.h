@@ -1,5 +1,5 @@
 //
-//  DrawToMemory.hpp
+//  DrawToMemory.h
 //  conplot
 //
 //  Created by Nick on 15/02/2013.
@@ -10,12 +10,12 @@
 #define conplot_DrawToMemory_hpp
 
 #include <array>
-#include "DataSeries.hpp"
-#include "Point.hpp"
-#include "Rectangle.hpp"
-#include "SigGen.hpp"
+#include "DataSeries.h"
+#include "Point.h"
+#include "Rectangle.h"
+#include "SigGen.h"
 
-#include "CharsAndFlags.hpp"
+#include "CharsAndFlags.h"
 
 using namespace std;
 
