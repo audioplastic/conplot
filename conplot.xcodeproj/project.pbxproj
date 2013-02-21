@@ -34,6 +34,7 @@
 		01055A5A1680D1A000FA026C /* Rectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Rectangle.hpp; sourceTree = "<group>"; };
 		01055A5B1680D1A000FA026C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		01055A5D1680D75E00FA026C /* Point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
+		010D8E9116D65BAC00292FFC /* CharsAndFlags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharsAndFlags.hpp; sourceTree = "<group>"; };
 		01BFC09D16873BCA00B0F1BA /* SigGen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SigGen.hpp; sourceTree = "<group>"; };
 		01FE12D116CE53E800952ADA /* DrawToScreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawToScreen.hpp; sourceTree = "<group>"; };
 		01FE12D216CE55F800952ADA /* DrawToMemory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawToMemory.hpp; sourceTree = "<group>"; };
@@ -74,19 +75,20 @@
 		01055A4E1680D13B00FA026C /* conplot */ = {
 			isa = PBXGroup;
 			children = (
+				01055A5B1680D1A000FA026C /* main.cpp */,
 				01055A581680D1A000FA026C /* catch.hpp */,
 				01055A5D1680D75E00FA026C /* Point.hpp */,
 				01FE12DB16CE5EAF00952ADA /* Point.cpp */,
 				01055A5A1680D1A000FA026C /* Rectangle.hpp */,
 				01FE12D816CE5E7000952ADA /* Rectangle.cpp */,
-				01055A5B1680D1A000FA026C /* main.cpp */,
-				01055A511680D13B00FA026C /* conplot.1 */,
-				01BFC09D16873BCA00B0F1BA /* SigGen.hpp */,
-				01FE12D116CE53E800952ADA /* DrawToScreen.hpp */,
 				01FE12D216CE55F800952ADA /* DrawToMemory.hpp */,
 				01FE12D516CE5BB400952ADA /* DrawToMemory.cpp */,
-				01FE12D316CE56B400952ADA /* TicToc.h */,
+				01FE12D116CE53E800952ADA /* DrawToScreen.hpp */,
 				01FE12D416CE57A300952ADA /* DataSeries.hpp */,
+				01055A511680D13B00FA026C /* conplot.1 */,
+				010D8E9116D65BAC00292FFC /* CharsAndFlags.hpp */,
+				01BFC09D16873BCA00B0F1BA /* SigGen.hpp */,
+				01FE12D316CE56B400952ADA /* TicToc.h */,
 			);
 			path = conplot;
 			sourceTree = "<group>";

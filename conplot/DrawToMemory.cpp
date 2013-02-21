@@ -18,20 +18,20 @@ void DataGrid::addPoint(Point p, char c)
 void DataGrid::drawBox(const Rectangle& r)
 {
     //Top and bottom
-    fill_n(data[0].begin()+1, r.getWidth()-2, chars.getChar(p_t::BORDER_T) );
-    fill_n(data[r.getBtm()].begin()+1, r.getWidth()-2, chars.getChar(p_t::BORDER_B));
+    fill_n(data[0].begin()+1, r.getWidth()-2, pChars.getChar(p_t::BORDER_T) );
+    fill_n(data[r.getBtm()].begin()+1, r.getWidth()-2, pChars.getChar(p_t::BORDER_B));
     
     //Left and right hand border edges
     for (int nn=1; nn<rect.getHeight()-1; ++nn){
-        addPoint(Point(r.getLeft(), nn), chars.getChar(p_t::BORDER_L) );
-        addPoint(Point(r.getRight(), nn), chars.getChar(p_t::BORDER_R) );
+        addPoint(Point(r.getLeft(), nn), pChars.getChar(p_t::BORDER_L) );
+        addPoint(Point(r.getRight(), nn), pChars.getChar(p_t::BORDER_R) );
     }
     
     //Corners
-    addPoint(r.getTL(), chars.getChar(p_t::BORDER_TL) );
-    addPoint(r.getTR(), chars.getChar(p_t::BORDER_TR) );
-    addPoint(r.getBL(), chars.getChar(p_t::BORDER_BL) );
-    addPoint(r.getBR(), chars.getChar(p_t::BORDER_BR) );
+    addPoint(r.getTL(), pChars.getChar(p_t::BORDER_TL) );
+    addPoint(r.getTR(), pChars.getChar(p_t::BORDER_TR) );
+    addPoint(r.getBL(), pChars.getChar(p_t::BORDER_BL) );
+    addPoint(r.getBR(), pChars.getChar(p_t::BORDER_BR) );
 }
 
 void DataGrid::addString(Point p, string s)
@@ -68,19 +68,18 @@ void DataGrid::addYAxis(float ymi, float yma, Rectangle axArea)
     const size_t yPts = axArea.getHeight();
     vector<float> yAnnot(yPts);
     
-    // These two lines make equivalet of MAtlab's linspace(start,end,points)
+    // These two lines make equivalet of Matlab's linspace(start,end,points)
     std::generate_n(yAnnot.begin(), yPts-1, gen_lin(ymi,(yma-ymi)/(yPts-1)) );
     yAnnot.back()=yma;
     
-    
-    
     // This is so ugly!! Refactor!
     size_t counter=yPts; //Decreasing counter
+    ostringstream v;
+//    v.width(9);
+    v.precision(2);
     for(int nn=axArea.getTop(); nn<axArea.getBtm()+1; ++nn){
-        addPoint(Point(axArea.getRight(),nn),chars.getChar(p_t::AXIS_V));
-        ostringstream v; // Make this every time as clearing it is a PITA
-        v.width(9);
-        v.precision(2);
+        addPoint(Point(axArea.getRight(),nn),pChars.getChar(p_t::AXIS_V));
+        v.str(""); //Hacky clear of str buff - m.str(std::string()); - would be better for sh*t compiler        
         if (    min(fabs(yma),fabs(ymi)) < 0.05    ||    max(fabs(yma),fabs(ymi)) > 1e5   ) {
             v << scientific << yAnnot[--counter];
         } else {
@@ -88,7 +87,6 @@ void DataGrid::addYAxis(float ymi, float yma, Rectangle axArea)
         }
         addString(Point(axArea.getLeft(),nn), v.str()  );
     }
-    
 }
 
 void DataGrid::addXAxis(const float xmi, const float xma, const Rectangle axArea)
@@ -116,51 +114,16 @@ void DataGrid::addXAxis(const float xmi, const float xma, const Rectangle axArea
 
 void DataGrid::addLegend()
 {
-    //        //Make a rectangle size that fits series data names and then plce it
-    //        const size_t maxw = plotArea.getWidth()-4;
-    //        const size_t maxh = plotArea.getHeight()-4;
-    //
-    //        const size_t hNeeded = series.getNumSeries() + 2;
-    //        if (hNeeded>maxh)
-    //        {
-    //            cout << "Warning: Not enough veritcal space for legend";
-    //        }
-    //
-    //        size_t wNeeded = 0;
-    //        for (auto tmpSeries : series)
-    //        {
-    //
-    //        }
+    // BLAH - OVERKILL - ABANDONED UNLESS SOMEONE ELSE WANTS TO DO IT
 }
 
-// This code maps a value within one range to a vlue in another scale
-template<typename T>
- int DataGrid::mapVal(T ipVal,
-                  T ipMin,   T ipMax,
-                  int opMin, int opMax)
-{
-    //ip params
-    const float ipRange = ipMax-ipMin;
-    
-    //prevent div 0
-    if (ipRange==0)
-    {
-        return opMin;
-    }
-    
-    const float ipFract = ((float)(ipVal - ipMin)) / ipRange;
-    
-    //op params
-    const float opRange = opMax-opMin;
-    return opMin + (int)round(ipFract*opRange);
-};
+
 
 //PUBLIC METHODS ================================================
 // These are too simple to bother defining in a cpp file
 
 
 //MAIN RENDER CODE ================================================
-template <class T>
 void DataGrid::render()
 {
     //vector<T> xData(_xData); //Assign xData to non-const so we can pass by const reference.
@@ -178,12 +141,6 @@ void DataGrid::render()
         addTitle();
     }
     
-    // Calculate ranges
-    //const T xMin = *std::min_element(xData.begin(), xData.end());
-    //const T xMax = *std::max_element(xData.begin(), xData.end());
-    //const T yMin = *std::min_element(yData.begin(), yData.end());
-    //const T yMax = *std::max_element(yData.begin(), yData.end());
-    
     // Abort if series vec is empty
     if (series.getNumSeries()==0){
         cout << "No data series available, aborting. \n";
@@ -191,12 +148,13 @@ void DataGrid::render()
     }
     
     // get ranges
-    const T xMin = series.getXmin();
-    const T xMax = series.getXmax();
-    const T yMin = series.getYmin();
-    const T yMax = series.getYmax();
-    
-    
+    const float xMin = series.getXmin();
+    const float xMax = series.getXmax();
+    const float yMin = series.getYmin();
+    const float yMax = series.getYmax();
+    // Another way of aliasing - pointless here bu I <3 lambdas
+    // To use this alternative, replace xMin with xMin() below
+    // auto xMin = [&](){return series.getXmin();};  
     
     // Add the y-axis if flagged
     if (flags & (int)o_t::YAXIS) {
@@ -238,6 +196,5 @@ void DataGrid::render()
     if (flags & (int)o_t::LEGEND) {
         addLegend();
     }
-    
     
 } // End of rendering function

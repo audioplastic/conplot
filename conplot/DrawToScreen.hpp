@@ -21,7 +21,7 @@ using namespace std;
 //  \_/ \___|\___|\__\___/|_|      \_/ \___/|_| |_| |_|_|\__|
 ostream& operator<<(ostream& os, DataGrid& dg)
 {
-    auto renderFunc = [&](){dg.render<float>();}; // Lambda to keep things dry
+    auto renderFunc = [&](){dg.render();}; // Lambda to keep things dry
     if (dg.flags & (int)o_t::VERBOSE)
     {
         TicToc t;
