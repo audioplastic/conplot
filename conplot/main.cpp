@@ -15,7 +15,7 @@ using namespace std;
 //|_| |_| |_|\__,_|_|_| |_|
 int main(int argc, char *argv[])
 {
-    //--------------------------------------------------------------------
+    cout << "\n--------------------------------------------------------------------";
     cout << "\n - DEMO 1: Plot some noise\n";
     {
         const size_t elements = 200;
@@ -27,11 +27,11 @@ int main(int argc, char *argv[])
         std::generate_n(y.begin(), elements, r);
         
         DataGrid g;
-        g.series.addSeries(   SeriesData<float>(y) , '*' );
+        g.series.addSeries( SeriesData<float>(y) , '*' );
         cout << g;
     }
     
-    //--------------------------------------------------------------------
+    cout << "\n--------------------------------------------------------------------";
     cout << "\n - DEMO 2: Plot a sine wave\n";
     {
         const size_t elements = 200;
@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
         std::generate_n(y.begin(), elements, a);
     
         DataGrid g;
-        g.series.addSeries(   SeriesData<float>(y) , '*' );
+        g.series.addSeries( SeriesData<float>(y) , '*' );
         cout << g;
     }
     
-    //--------------------------------------------------------------------
+    cout << "\n--------------------------------------------------------------------";
     cout << "\n - DEMO 3: Logarithmic axis\n";
     {
         const size_t elements = 200;
@@ -59,11 +59,11 @@ int main(int argc, char *argv[])
         std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
         
         DataGrid g;
-        g.series.addSeries(   SeriesData<float>(y,x) , '*' );
+        g.series.addSeries( SeriesData<float>(y,x) , '*' );
         cout << g;
     }
     
-    //--------------------------------------------------------------------
+    cout << "\n--------------------------------------------------------------------";
     cout << "\n - DEMO 4: Plot multiple series on same area\n";
     {
         const size_t elements = 300;
@@ -81,21 +81,21 @@ int main(int argc, char *argv[])
         std::generate_n(y3.begin(), elements, [&](){return -a();} );
         
         DataGrid g = DataGrid(Rectangle(Point(0,0), 80, 30)); //Customize size with rectangle object
-        g.series.addSeries(   SeriesData<float>(y1,x) , '*');
-        g.series.addSeries(   SeriesData<float>(y2,x)  ); // if no marker specified, it will use series number
-        g.series.addSeries(   SeriesData<float>(y3,x), '>'  );
+        g.series.addSeries( SeriesData<float>(y1,x) , '*');
+        g.series.addSeries( SeriesData<float>(y2,x)  ); // if no marker specified, it will use series number
+        g.series.addSeries( SeriesData<float>(y3,x), '>'  );
 
         g.setFlags ((u_char)o_t::ALL);
         cout << g;
     }
     
-    //--------------------------------------------------------------------
+    cout << "\n--------------------------------------------------------------------";
     cout << "\n - DEMO 5: Subtle tweaks\n";
     {
         const size_t elements = 100;
         std::vector<float> y(elements);
         
-        auto a = gen_sine(2.f*M_PI/elements);
+        auto a = gen_trisaw();
         std::generate_n(y.begin(), elements, a);
         
         DataGrid g = DataGrid(Rectangle(Point(20,3), 50, 15));
@@ -104,6 +104,10 @@ int main(int argc, char *argv[])
         g.setFlags ((u_char)o_t::BORDER | (u_char)o_t::TITLE);
         g.setTitle("SOME AMAZING PLOT TITLE");
         PlotChars tmpChars = g.getChars();
+        tmpChars.setChar(p_t::BORDER_TL, '+');
+        tmpChars.setChar(p_t::BORDER_TR, '+');
+        tmpChars.setChar(p_t::BORDER_BL, '+');
+        tmpChars.setChar(p_t::BORDER_BR, '+');
         tmpChars.setChar(p_t::BORDER_T, '~');
         tmpChars.setChar(p_t::BORDER_B, '~');
         tmpChars.setChar(p_t::BORDER_L, '[');
@@ -113,7 +117,7 @@ int main(int argc, char *argv[])
         cout << g;
     }
     
-//#define CONPLOT_UNIT_TEST
+#define CONPLOT_UNIT_TEST
     
 #ifdef CONPLOT_UNIT_TEST
 	// Create a default config object

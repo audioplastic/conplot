@@ -31,6 +31,7 @@ ostream& operator<<(ostream& os, DataGrid& dg)
         renderFunc();
     }
     
+    // This is the point where we act on any offset (if one exists)
     string xPad, yPad;
     xPad.assign(dg.screenDrawOffset.getX(), ' ');
     yPad.assign(dg.screenDrawOffset.getY(), '\n');
