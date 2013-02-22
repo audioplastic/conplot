@@ -34,6 +34,8 @@ private:
     Rectangle rect, plotArea;
 	vector<vector<char>> data;
     
+    Point screenDrawOffset;
+    
     u_char flags;
     string title;
     
@@ -93,11 +95,17 @@ public:
     
 	DataGrid(Rectangle _rect = Rectangle(Point(0,0), Point(40,20))) :
     rect(_rect),
-    plotArea(_rect),
     title("unnamed"),
 	data ( vector<vector<char>> (_rect.getHeight(), vector<char>(_rect.getWidth(), pChars.getChar(p_t::EMPTY)  ))  ) //ugly as
 	{
-        //plotArea = Rectangle(rect.getTL()+2, rect.getBR()-2);
+        // The wierd jiggery pokery here is to move the rectangle to the top left
+        // ... even if the user sets otherwise
+        // it is easier to deal with positional offsets whendrawing to screen
+        // ... so the desired location is stored in a separate variable.
+        screenDrawOffset = rect.getTL();
+        rect.setLocation(Point(0,0));
+        
+        plotArea = rect;
     }
     
     void setTitle(const string& _title)

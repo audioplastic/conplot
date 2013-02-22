@@ -21,7 +21,7 @@ using namespace std;
 //  \_/ \___|\___|\__\___/|_|      \_/ \___/|_| |_| |_|_|\__|
 ostream& operator<<(ostream& os, DataGrid& dg)
 {
-    auto renderFunc = [&](){dg.render();}; // Lambda to keep things dry
+    auto renderFunc = [&](){dg.render();}; // Lambda to keep things dry when render func was more complex
     if (dg.flags & (int)o_t::VERBOSE)
     {
         TicToc t;
@@ -31,10 +31,17 @@ ostream& operator<<(ostream& os, DataGrid& dg)
         renderFunc();
     }
     
+    string xPad, yPad;
+    xPad.assign(dg.screenDrawOffset.getX(), ' ');
+    yPad.assign(dg.screenDrawOffset.getY(), '\n');
+    
+    
     os << endl;// New line so command prompt not in the way!
     // The following code just spews a 2D char vector to the console
+    os << yPad;
     for(auto row : dg.data)
     {
+        os << xPad;
         for(auto col : row){
             os << col;
         }

@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         auto a = gen_sine(2.f*M_PI/elements);
         std::generate_n(y.begin(), elements, a);
         
-        DataGrid g = DataGrid(Rectangle(Point(4,0), 50, 15));
+        DataGrid g = DataGrid(Rectangle(Point(20,3), 50, 15));
         g.series.addSeries(   SeriesData<float>(y) , '*' );
         
         g.setFlags ((u_char)o_t::BORDER | (u_char)o_t::TITLE);
