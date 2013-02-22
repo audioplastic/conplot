@@ -3,9 +3,9 @@
 #define CATCH_CONFIG_RUNNER
 
 #include "conplot.h"
+#include <random>
 
 using namespace std;
-
 
 
 //                 _
@@ -15,50 +15,105 @@ using namespace std;
 //|_| |_| |_|\__,_|_|_| |_|
 int main(int argc, char *argv[])
 {
-    const size_t elements = 300;
-    std::vector<float> y(elements);
-    std::vector<float> x(elements);
+    //--------------------------------------------------------------------
+    cout << "\n - DEMO 1: Plot some noise\n";
+    {
+        const size_t elements = 200;
+        std::vector<float> y(elements);
+        
+        std::uniform_real_distribution<float> distribution(0.0f, 2.0f); //Values between 0 and 2
+        std::mt19937 engine; // Mersenne twister MT19937
+        auto r = std::bind(distribution, engine);
+        std::generate_n(y.begin(), elements, r);
+        
+        DataGrid g;
+        g.series.addSeries(   SeriesData<float>(y) , '*' );
+        cout << g;
+    }
     
-//    std::uniform_real_distribution<float> distribution(0.0f, 2.0f); //Values between 0 and 2
-//    std::mt19937 engine; // Mersenne twister MT19937
-//    auto generator = std::bind(distribution, engine);
-//    std::generate_n(y.begin(), elements, generator);
+    //--------------------------------------------------------------------
+    cout << "\n - DEMO 2: Plot a sine wave\n";
+    {
+        const size_t elements = 200;
+        std::vector<float> y(elements);
+                
+        auto a = gen_sine(2.f*M_PI/elements);
+        std::generate_n(y.begin(), elements, a);
     
-//    std::generate_n(y.begin(), elements, gen_sine(2 * 2.f*M_PI/elements) );
-//    std::generate_n(y.begin(), elements, gen_square(elements / 3,0.1f) );
-//    std::generate_n(y.begin(), elements, gen_trisaw(elements / 3, 1.0f) );
+        DataGrid g;
+        g.series.addSeries(   SeriesData<float>(y) , '*' );
+        cout << g;
+    }
     
+    //--------------------------------------------------------------------
+    cout << "\n - DEMO 3: Logarithmic axis\n";
+    {
+        const size_t elements = 200;
+        std::vector<float> y(elements);
+        std::vector<float> x(elements);
+        
+        auto a = gen_sine(2.f*M_PI/elements);
+        std::generate_n(y.begin(), elements, a);
+        
+        auto lin = gen_lin(10.f,5.f);
+        std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
+        
+        DataGrid g;
+        g.series.addSeries(   SeriesData<float>(y,x) , '*' );
+        cout << g;
+    }
     
-//    std::generate_n(x.begin(), elements, gen_lin(100.f, 100.f) );
-    auto lin = gen_lin(10.f,5.f);
-    std::generate_n(x.begin(), elements, [&](){return logf(lin());} );
+    //--------------------------------------------------------------------
+    cout << "\n - DEMO 4: Plot multiple series on same area\n";
+    {
+        const size_t elements = 300;
+        std::vector<float> y1(elements);
+        std::vector<float> y2(elements);
+        std::vector<float> y3(elements);
+        std::vector<float> x(elements);
+        
+        std::generate_n(x.begin(), elements, gen_lin(100.f, 100.f) );
+
+        auto a = gen_sine(2.f*M_PI/elements);
+        auto b = gen_sine(3 * 2.f*M_PI/elements);
+        std::generate_n(y1.begin(), elements, [&](){ return (a() + b()); } );
+        std::generate_n(y2.begin(), elements, [&](){return .5*a();} );
+        std::generate_n(y3.begin(), elements, [&](){return -a();} );
+        
+        DataGrid g = DataGrid(Rectangle(Point(0,0), 80, 30)); //Customize size with rectangle object
+        g.series.addSeries(   SeriesData<float>(y1,x) , '*');
+        g.series.addSeries(   SeriesData<float>(y2,x)  ); // if no marker specified, it will use series number
+        g.series.addSeries(   SeriesData<float>(y3,x), '>'  );
+
+        g.setFlags ((u_char)o_t::ALL);
+        cout << g;
+    }
     
+    //--------------------------------------------------------------------
+    cout << "\n - DEMO 5: Subtle tweaks\n";
+    {
+        const size_t elements = 100;
+        std::vector<float> y(elements);
+        
+        auto a = gen_sine(2.f*M_PI/elements);
+        std::generate_n(y.begin(), elements, a);
+        
+        DataGrid g = DataGrid(Rectangle(Point(4,0), 50, 15));
+        g.series.addSeries(   SeriesData<float>(y) , '*' );
+        
+        g.setFlags ((u_char)o_t::BORDER | (u_char)o_t::TITLE);
+        g.setTitle("SOME AMAZING PLOT TITLE");
+        PlotChars tmpChars = g.getChars();
+        tmpChars.setChar(p_t::BORDER_T, '~');
+        tmpChars.setChar(p_t::BORDER_B, '~');
+        tmpChars.setChar(p_t::BORDER_L, '[');
+        tmpChars.setChar(p_t::BORDER_R, ']');
+        g.setChars(tmpChars);
+        
+        cout << g;
+    }
     
-    
-    DataGrid g = DataGrid(Rectangle(Point(0,0), 90, 31)); // Half console
-    PlotChars tmpChars = g.getChars();
-    tmpChars.setChar(p_t::BORDER_T, '~');
-    tmpChars.setChar(p_t::BORDER_B, '~');
-    g.setChars(tmpChars);
-    
-    auto a = gen_sine(2.f*M_PI/elements); auto b = gen_sine(3 * 2.f*M_PI/elements);
-    std::generate_n(y.begin(), elements, [&](){ return (a() + b()); } );
-    g.getSeries()->addSeries(   SeriesData<float>(y,x) , '*', "Series A" );
-    
-    std::vector<float> y2(elements);
-    std::generate_n(y2.begin(), elements, [&](){return .5*a();} );
-    g.getSeries()->addSeries(   SeriesData<float>(y2,x)  );
-    
-    std::vector<float> y3(elements);
-    std::generate_n(y3.begin(), elements, [&](){return -a();} );
-    g.getSeries()->addSeries(   SeriesData<float>(y3,x), '>'  );
-    
-    
-    g.setTitle("Spongeballs");
-    g.setFlags ((u_char)o_t::ALL); //(  (u_char)o_t::BORDER | (u_char)o_t::TITLE | (u_char)o_t::YAXIS );
-    
-	cout << g;
-    
+//#define CONPLOT_UNIT_TEST
     
 #ifdef CONPLOT_UNIT_TEST
 	// Create a default config object

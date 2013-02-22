@@ -3,6 +3,10 @@ conplot
 
 C++11 plotting library for console apps. It is work in progress!
 
+navigate to conplot directory and build with
+
+clang++ -std=c++11 -stdlib=libc++ main.cpp conplot/*
+
 ```
 /~ Spongeballs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
 |                                                                              |

@@ -32,7 +32,6 @@ class DataGrid
 private:
     PlotChars pChars;
     Rectangle rect, plotArea;
-    SeriesDataVec<float> series;
 	vector<vector<char>> data;
     
     u_char flags;
@@ -79,6 +78,7 @@ private:
     };
     
 public:
+
     //             _     _ _        _       _             __
     // _ __  _   _| |__ | (_) ___  (_)_ __ | |_ ___ _ __ / _| __ _  ___ ___
     //| '_ \| | | | '_ \| | |/ __| | | '_ \| __/ _ \ '__| |_ / _` |/ __/ _ \
@@ -86,11 +86,12 @@ public:
     //| .__/ \__,_|_.__/|_|_|\___| |_|_| |_|\__\___|_|  |_|  \__,_|\___\___|
     //|_|
     
+    SeriesDataVec<float> series;
 
     // This is the important bit where the rendering happens
     friend ostream& operator<<(ostream& os, DataGrid& dg);
     
-	DataGrid(Rectangle _rect = Rectangle(Point(0,0), Point(80,24))) :
+	DataGrid(Rectangle _rect = Rectangle(Point(0,0), Point(40,20))) :
     rect(_rect),
     plotArea(_rect),
     title("unnamed"),
@@ -120,7 +121,7 @@ public:
     }
     
     
-    SeriesDataVec<float>* getSeries() {return &series;}
+    //SeriesDataVec<float>* getSeries() {return &series;}
     
     //                    _
     // _ __ ___ _ __   __| | ___ _ __
